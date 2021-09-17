@@ -1,3 +1,0 @@
-﻿  BitmapFileHeaders.cpp
-C:\Users\amitf\OneDrive\שולחן העבודה\Fractal-Images\BitmapFileHeaders\BitmapFileHeaders\BitmapFileHeaders.cpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-  BitmapFileHeaders.vcxproj -> C:\Users\amitf\OneDrive\שולחן העבודה\Fractal-Images\BitmapFileHeaders\Debug\BitmapFileHeaders.exe
