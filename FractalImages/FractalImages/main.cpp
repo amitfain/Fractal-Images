@@ -2,12 +2,13 @@
 //
 
 #include <iostream>
-#include "BitmapFileHeader.h"
-#include "BitmapInfoHeader.h"
+#include "Bitmap.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    myproj::Bitmap bitmap(800, 600);
+    bitmap.write("test.bmp");
+    std::cout << "finished" << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

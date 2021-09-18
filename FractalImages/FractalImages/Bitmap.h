@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <memory>
 
 namespace myproj {
 	class Bitmap
@@ -10,6 +11,8 @@ namespace myproj {
 	private:
 		int _width{ 0 };
 		int _height{ 0 };
+		std::unique_ptr<uint8_t[]> _pPixels{ nullptr };
+		int pixelAmount();
 
 	public:
 		Bitmap(int width, int height);
