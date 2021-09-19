@@ -6,7 +6,13 @@
 namespace myproj {
 	Bitmap::Bitmap(int width, int height) : _width(width), _height(height), _pPixels(new uint8_t[width * height * 3]{}) {}
 
-	void Bitmap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue){}
+	void Bitmap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue){
+		uint8_t* pPixel = _pPixels.get();
+		pPixel += (y * 3) * _width + (x * 3);
+		pPixel[0] = blue;
+		pPixel[1] = green;
+		pPixel[2] = red;
+	}
 
 	bool Bitmap::write(std::string filename) {
 		bool isWritten = true;

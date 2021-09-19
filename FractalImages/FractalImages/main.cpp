@@ -6,7 +6,10 @@
 
 int main()
 {
-    myproj::Bitmap bitmap(800, 600);
+    const int WIDTH = 800;
+    const int HEIGHT = 600;
+    myproj::Bitmap bitmap(WIDTH, HEIGHT);
+    bitmap.setPixel(WIDTH / 2, HEIGHT / 2, 255, 255, 255);
     bitmap.write("test.bmp");
     std::cout << "finished" << std::endl;
 }
