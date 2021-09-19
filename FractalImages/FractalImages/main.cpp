@@ -3,13 +3,35 @@
 
 #include <iostream>
 #include "Bitmap.h"
+#include "Mandlebrot.h"
 
 int main()
 {
     const int WIDTH = 800;
     const int HEIGHT = 600;
     myproj::Bitmap bitmap(WIDTH, HEIGHT);
-    bitmap.setPixel(WIDTH / 2, HEIGHT / 2, 255, 255, 255);
+
+    double minX = 999999;
+    double maxX = -999999;
+    double minY = 999999;
+    double maxY = -999999;
+    
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++){
+            double xFractle = (x - (double)WIDTH / 2 - 150) / ((double)HEIGHT / 2);
+            double yFractle = (y - (double)HEIGHT / 2) / ((double)HEIGHT / 2);
+
+            if (xFractle < minX) minX = xFractle;
+            if (xFractle > maxX) maxX = xFractle;
+
+            if (yFractle < minY) minY = yFractle;
+            if (yFractle > maxY) maxY = yFractle;
+
+            bitmap.setPixel(x, y, myproj::Mandlebrot::getIterations(xFractle, yFractle), 0, 0);
+        }
+    }
+
+
     bitmap.write("test.bmp");
     std::cout << "finished" << std::endl;
 }
