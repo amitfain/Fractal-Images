@@ -5,15 +5,18 @@ namespace myproj {
 	{
 		std::complex<double> c(x, y);
 		std::complex<double> z{};
+		int iterations = 0;
 
-		for (int i = 0; i < MAX_ITERATIONS && abs(z) <= 2; i++) {
+		while (iterations < MAX_ITERATIONS) {
 			z = z * z + c;
+
+			if (abs(z) > 2) {
+				break;
+			}
+
+			iterations++;
 		}
 
-		if (abs(z) > 2) {
-			return 255;
-		}
-
-		return 0;
+		return iterations;
 	}
 }

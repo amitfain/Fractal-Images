@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <iterator>
 #include "Bitmap.h"
 #include "Mandlebrot.h"
 
@@ -10,30 +12,53 @@ int main()
     const int WIDTH = 800;
     const int HEIGHT = 600;
     myproj::Bitmap bitmap(WIDTH, HEIGHT);
-
-    double minX = 999999;
-    double maxX = -999999;
-    double minY = 999999;
-    double maxY = -999999;
+    std::unique_ptr<int[]> histogram(new int[myproj::Mandlebrot::MAX_ITERATIONS]{});
+    std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{});
     
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++){
             double xFractle = (x - (double)WIDTH / 2 - 150) / ((double)HEIGHT / 2);
             double yFractle = (y - (double)HEIGHT / 2) / ((double)HEIGHT / 2);
 
-            if (xFractle < minX) minX = xFractle;
-            if (xFractle > maxX) maxX = xFractle;
+            uint8_t iteration = myproj::Mandlebrot::getIterations(xFractle, yFractle);
+            fractal[y * WIDTH + x] = iteration;
 
-            if (yFractle < minY) minY = yFractle;
-            if (yFractle > maxY) maxY = yFractle;
+            if (iteration != myproj::Mandlebrot::MAX_ITERATIONS) {
+                histogram[iteration]++;
+            }
+        }
+    }
 
-            bitmap.setPixel(x, y, myproj::Mandlebrot::getIterations(xFractle, yFractle), 0, 0);
+    int total = 0;
+
+    for (int i = 0; i < myproj::Mandlebrot::MAX_ITERATIONS; i++) {
+        total += histogram[i];
+    }
+
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            int iterations = (fractal[y * WIDTH + x]);
+            uint8_t red = 0;
+            uint8_t blue = 0;
+            uint8_t green = 0;
+
+            if (iterations != myproj::Mandlebrot::MAX_ITERATIONS) {
+                double hue = 0.0;
+
+                for (int i = 0; i <= iterations; i++) {
+                    hue += ((double)histogram[i]) / total;
+                }
+
+                blue = pow(255, hue);
+            }
+
+            bitmap.setPixel(x, y, red, green, blue);
         }
     }
 
 
     bitmap.write("test.bmp");
-    std::cout << "finished" << std::endl;
+    std::cout << "finished " << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
