@@ -4,7 +4,7 @@ namespace myproj {
 	int Mandlebrot::getIterations(double x, double y)
 	{
 		std::complex<double> c(x, y);
-		std::complex<double> z{};
+		std::complex<double> z = 0;
 		int iterations = 0;
 
 		while (iterations < MAX_ITERATIONS) {

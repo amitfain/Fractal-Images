@@ -1,5 +1,3 @@
-﻿  Mandlebrot.cpp
-  main.cpp
-C:\Users\amitf\OneDrive\שולחן העבודה\Fractal-Images\FractalImages\FractalImages\main.cpp(52,27): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
-  Generating Code...
+﻿  main.cpp
+C:\Users\amitf\OneDrive\שולחן העבודה\Fractal-Images\FractalImages\FractalImages\main.cpp(56,27): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
   FractalImages.vcxproj -> C:\Users\amitf\OneDrive\שולחן העבודה\Fractal-Images\FractalImages\Debug\FractalImages.exe

@@ -2,7 +2,7 @@
 namespace myproj {
 	class Mandlebrot {
 	public:
-		static const int MAX_ITERATIONS = 100;
+		static const int MAX_ITERATIONS = 1000;
 
 		static int getIterations(double x, double y);
 	};

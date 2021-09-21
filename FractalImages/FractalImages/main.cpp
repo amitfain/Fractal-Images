@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <memory>
-#include <iterator>
 #include "Bitmap.h"
 #include "Mandlebrot.h"
+#include "ZoomList.h"
 
 int main()
 {
@@ -14,13 +14,14 @@ int main()
     myproj::Bitmap bitmap(WIDTH, HEIGHT);
     std::unique_ptr<int[]> histogram(new int[myproj::Mandlebrot::MAX_ITERATIONS]{});
     std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{});
+    myproj::ZoomList zoomList(WIDTH, HEIGHT);
+    zoomList.add(myproj::Zoom(WIDTH / 2, HEIGHT / 2, 4.0/WIDTH));
     
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++){
-            double xFractle = (x - (double)WIDTH / 2 - 150) / ((double)HEIGHT / 2);
-            double yFractle = (y - (double)HEIGHT / 2) / ((double)HEIGHT / 2);
+            std::pair<double, double> fractle = zoomList.doZoom(x, y);
 
-            uint8_t iteration = myproj::Mandlebrot::getIterations(xFractle, yFractle);
+            uint8_t iteration = myproj::Mandlebrot::getIterations(fractle.first, fractle.second);
             fractal[y * WIDTH + x] = iteration;
 
             if (iteration != myproj::Mandlebrot::MAX_ITERATIONS) {
