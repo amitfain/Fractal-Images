@@ -9,8 +9,8 @@ namespace myproj {
 	}
 
 	std::pair<double, double> ZoomList::doZoom(int x, int y) {
-		double xRel = (x - _width / 2) *_scale + _xCenter;
-		double yRel = (y - _height / 2) * _scale + _yCenter;
+		double xRel = (x - _width / 2.0) *_scale + _xCenter;
+		double yRel = (y - _height / 2.0) * _scale + _yCenter;
 
 		return std::pair<double, double>(xRel, yRel);
 	}

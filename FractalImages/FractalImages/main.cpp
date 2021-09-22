@@ -3,15 +3,22 @@
 
 #include <iostream>
 #include <memory>
-#include "Bitmap.h"
-#include "Mandlebrot.h"
-#include "ZoomList.h"
+#include "FractalCreator.h"
 
 int main()
 {
     const int WIDTH = 800;
     const int HEIGHT = 600;
-    myproj::Bitmap bitmap(WIDTH, HEIGHT);
+    const std::string FILE_NAME = "test.bmp";
+    myproj::FractalCreator fractalCreator(WIDTH, HEIGHT);
+    fractalCreator.addZoom(myproj::Zoom(295, HEIGHT - 202, 0.1));
+    fractalCreator.addZoom(myproj::Zoom(312, HEIGHT - 304, 0.1));
+    fractalCreator.calculateIteration();
+    fractalCreator.calculateTotalIterations();
+    fractalCreator.drawFractal();
+    fractalCreator.writeBitmap(FILE_NAME);
+
+    /*myproj::Bitmap bitmap(WIDTH, HEIGHT);
     std::unique_ptr<int[]> histogram(new int[myproj::Mandlebrot::MAX_ITERATIONS]{});
     std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{});
     myproj::ZoomList zoomList(WIDTH, HEIGHT);
@@ -58,7 +65,8 @@ int main()
     }
 
 
-    bitmap.write("test.bmp");
+    bitmap.write("test.bmp");*/
+
     std::cout << "finished " << std::endl;
 }
 
